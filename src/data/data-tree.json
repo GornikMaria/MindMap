@@ -1,0 +1,96 @@
+{
+  "name": "Exranet",
+  "autoTests": 17,
+  "manualTests": 30,
+  "children": [
+    {
+      "name": "Тарифы",
+      "autoTests": 8,
+      "manualTests": 15,
+      "children": [
+        {
+          "name": "Уровни цен",
+          "autoTests": 4,
+          "manualTests": 5,
+          "children": [
+            {
+              "name": "Изменение уровней цен",
+              "autoTests": 4,
+              "manualTests": 5,
+              "children": [
+                {
+                  "name": "Изменение Тест 1",
+                  "autoTests": 1,
+                  "caseid": "1"
+                },
+                {
+                  "name": "Изменение Тест 2",
+                  "manualTests": 1,
+                  "caseid": "2"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Виды тарифов",
+          "autoTests": 4,
+          "manualTests": 10,
+          "children": [
+            {
+              "name": "Дочерний",
+              "autoTests": 2,
+              "manualTests": 5
+            },
+            {
+              "name": "Самостоятельный",
+              "autoTests": 2,
+              "manualTests": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Скидки",
+      "autoTests": 9,
+      "manualTests": 15,
+      "children": [
+        {
+          "name": "Промокоды",
+          "autoTests": 4,
+          "manualTests": 8,
+          "children": [
+            {
+              "name": "Промокод Express",
+              "autoTests": 1,
+              "manualTests": 1
+            },
+            {
+              "name": "Самостоятельный промокод",
+              "autoTests": 2,
+              "manualTests": 3
+            },
+            {
+              "name": "Импротированный промокод",
+              "autoTests": 1,
+              "manualTests": 4
+            }
+          ]
+        },
+        {
+          "name": "Система лояльности",
+          "autoTests": 5,
+          "manualTests": 7,
+          "children": [
+            {
+              "name": "Уровни скидок",
+              "autoTests": 5,
+              "manualTests": 7
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

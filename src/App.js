@@ -1,24 +1,16 @@
 import React from "react";
 import Tree from "react-d3-tree";
-import orgChartJson from "./data/org-chart.json";
+import dataTree from "./data/data-tree.json";
 import { useCenteredTree } from "./helpers";
+import './index.css';
 
-const containerStyles = {
-  width: "100vw",
-  height: "100vh"
-};
+const autoTestIcon = "rocket.svg";
+const manualTestIcon = "hand.svg";
 
-// Укажите пути к иконкам
-const autoTestIcon = "rocket.svg"; // Путь к иконке автотестов
-const manualTestIcon = "hand.svg";  // Путь к иконке ручных тестов
-
-// Функция для рекурсивного обновления узлов
 const updateIcons = (node) => {
-  // Установите иконки для текущего узла
   node.autoTestIcon = autoTestIcon;
   node.manualTestIcon = manualTestIcon;
 
-  // Если у узла есть дочерние элементы, рекурсивно обновите их
   if (node.children) {
     node.children.forEach(child => updateIcons(child));
   }
@@ -28,64 +20,80 @@ const renderForeignObjectNode = ({
   nodeDatum,
   toggleNode,
   foreignObjectProps
-}) => (
-  <g>
-    <circle r={15}></circle>
-    <foreignObject {...foreignObjectProps}>
-      <div
-        style={{
-          border: "1px solid transparent",
-          borderRadius: "5px",
-          backgroundColor: "#dedede",
-          padding: "10px"
-        }}
-      >
-        <h3 style={{ textAlign: "center" }}>{nodeDatum.name}</h3>
-        {nodeDatum.icon && (
-          <img
-            src={nodeDatum.icon}
-            alt={`${nodeDatum.name} icon`}
-            style={{ width: "30px", height: "30px", display: "block", margin: "0 auto" }}
-          />
-        )}
-        <div style={{ textAlign: "center" }}>
-          <p style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-            Автотесты: {nodeDatum.autoTests || 0}
-            <img
-              src={nodeDatum.autoTestIcon}
-              alt="Auto Test Icon"
-              style={{ width: "20px", height: "20px", marginLeft: "5px" }}
-            />
-          </p>
-          <p style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-            Ручные тесты: {nodeDatum.manualTests || 0}
-            <img
-              src={nodeDatum.manualTestIcon}
-              alt="Manual Test Icon"
-              style={{ width: "20px", height: "20px", marginLeft: "5px" }}
-            />
-          </p>
+}) => {
+  const caseID = nodeDatum.caseid !== undefined ? nodeDatum.caseid : 0;
+  const noHasCaseID = caseID === 0;
+
+  return (
+    <g>
+      <circle r={15}></circle>
+      <foreignObject {...foreignObjectProps}>
+        <div className="node-container">
+          {noHasCaseID ? (
+            <>
+              <h3 className="node-title">{nodeDatum.name}</h3>
+              {nodeDatum.icon && (
+                <img
+                  src={nodeDatum.icon}
+                  alt={`${nodeDatum.name} icon`}
+                  className="node-icon"
+                />
+              )}
+              <div className="test-info">
+                <p>
+                  Автотесты: {nodeDatum.autoTests || 0}
+                  <img
+                    src={nodeDatum.autoTestIcon}
+                    alt="Auto Test Icon"
+                    className="test-icon"
+                  />
+                </p>
+                <p>
+                  Ручные тесты: {nodeDatum.manualTests || 0}
+                  <img
+                    src={nodeDatum.manualTestIcon}
+                    alt="Manual Test Icon"
+                    className="test-icon"
+                  />
+                </p>
+              </div>
+              {nodeDatum.children && (
+                <button
+                  className="toggle-button"
+                  onClick={toggleNode}
+                >
+                  {nodeDatum.__rd3t.collapsed ? "Раскрыть" : "Закрыть"}
+                </button>
+              )}
+            </>
+          ) : (
+            <h3 className="node-title">
+              {nodeDatum.name}
+              {nodeDatum.autoTests > 0 && (
+                <img
+                  src={nodeDatum.autoTestIcon}
+                  alt="Auto Test Icon"
+                  className="test-icon"
+                />
+              )}
+              {nodeDatum.manualTests > 0 && (
+                <img
+                  src={nodeDatum.manualTestIcon}
+                  alt="Manual Test Icon"
+                  className="test-icon"
+                />
+              )}
+            </h3>
+          )}
         </div>
-        {nodeDatum.children && (
-          <button
-            style={{
-              width: "75%",
-              margin: "0 auto 1rem auto",
-              display: "block"
-            }}
-            onClick={toggleNode}
-          >
-            {nodeDatum.__rd3t.collapsed ? "Раскрыть" : "Закрыть"}
-          </button>
-        )}
-      </div>
-    </foreignObject>
-  </g>
-);
+      </foreignObject>
+    </g>
+  );
+};
 
 export default function App() {
   const [translate, containerRef] = useCenteredTree();
-  const nodeSize = { x: 210, y: 200 };
+  const nodeSize = { x: 230, y: 200 };
   const foreignObjectProps = {
     width: nodeSize.x - 20,
     height: nodeSize.y,
@@ -93,16 +101,14 @@ export default function App() {
     y: -20
   };
 
-  // Получаем корневой узел
-  const rootNode = orgChartJson;
+  const rootNode = dataTree;
 
-  // Обновляем иконки для всех узлов
   updateIcons(rootNode);
 
   return (
-    <div style={containerStyles} ref={containerRef}>
+    <div className="container" ref={containerRef}>
       <Tree
-        data={rootNode} // Используем обновлённый JSON с иконками
+        data={rootNode}
         translate={translate}
         nodeSize={nodeSize}
         rootNodeClassName="node__root"
