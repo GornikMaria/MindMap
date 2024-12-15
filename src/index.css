@@ -21,14 +21,18 @@ code {
 }
 
 .node-container {
-  border: 1px solid transparent;
+  border: 5px solid transparent;
   border-radius: 5px;
   background-color: #dedede;
-  padding: 10px;
+  margin: 10px;
 }
 
 .node-title {
   text-align: center;
+  max-width: 190px;
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis; 
 }
 
 .node-icon {

@@ -26,12 +26,17 @@ const renderForeignObjectNode = ({
 
   return (
     <g>
-      <circle r={15}></circle>
-      <foreignObject {...foreignObjectProps}>
+      <rect width={100} height={50} fill="#e0e0e0" />
+      <foreignObject {...foreignObjectProps} onClick={toggleNode}>
         <div className="node-container">
           {noHasCaseID ? (
             <>
-              <h3 className="node-title">{nodeDatum.name}</h3>
+              <h3
+                className="node-title"
+                title={nodeDatum.name}
+              >
+                {nodeDatum.name}
+              </h3>
               {nodeDatum.icon && (
                 <img
                   src={nodeDatum.icon}
@@ -57,17 +62,9 @@ const renderForeignObjectNode = ({
                   />
                 </p>
               </div>
-              {nodeDatum.children && (
-                <button
-                  className="toggle-button"
-                  onClick={toggleNode}
-                >
-                  {nodeDatum.__rd3t.collapsed ? "Раскрыть" : "Закрыть"}
-                </button>
-              )}
             </>
           ) : (
-            <h3 className="node-title">
+            <h3 className="node-title" title={nodeDatum.name}>
               {nodeDatum.name}
               {nodeDatum.autoTests > 0 && (
                 <img
@@ -91,11 +88,13 @@ const renderForeignObjectNode = ({
   );
 };
 
+
+
 export default function App() {
   const [translate, containerRef] = useCenteredTree();
   const nodeSize = { x: 230, y: 200 };
   const foreignObjectProps = {
-    width: nodeSize.x - 20,
+    width: nodeSize.x,
     height: nodeSize.y,
     x: -100,
     y: -20
