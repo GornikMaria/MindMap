@@ -21,10 +21,12 @@ code {
 }
 
 .node-container {
-  border: 5px solid transparent;
+  border: 2px solid transparent;
   border-radius: 5px;
   background-color: #dedede;
-  margin: 10px;
+  position: absolute;
+  width: fit-content;
+  height: fit-content
 }
 
 .node-title {

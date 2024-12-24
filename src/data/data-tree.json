@@ -2,26 +2,31 @@
   "name": "Exranet",
   "autoTests": 17,
   "manualTests": 30,
+  "tags": "auto",
   "children": [
     {
       "name": "Тарифы",
       "autoTests": 8,
       "manualTests": 15,
+      "tags": "auto",
       "children": [
         {
           "name": "Уровни цен",
           "autoTests": 4,
           "manualTests": 5,
+          "tags": "auto",
           "children": [
             {
               "name": "Изменение уровней цен",
               "autoTests": 4,
               "manualTests": 5,
+              "tags": "auto",
               "children": [
                 {
                   "name": "Изменение Тест 1",
                   "autoTests": 1,
-                  "caseid": "1"
+                  "caseid": "1",
+                  "tags": "auto"
                 },
                 {
                   "name": "Изменение Тест 2",
@@ -36,16 +41,17 @@
           "name": "Виды тарифов",
           "autoTests": 4,
           "manualTests": 10,
+          "tags": "auto",
           "children": [
             {
               "name": "Дочерний",
-              "autoTests": 2,
               "manualTests": 5
             },
             {
               "name": "Самостоятельный",
-              "autoTests": 2,
-              "manualTests": 5
+              "autoTests": 4,
+              "manualTests": 5,
+              "tags": "auto"
             }
           ]
         }
@@ -55,25 +61,28 @@
       "name": "Скидки",
       "autoTests": 9,
       "manualTests": 15,
+      "tags": "auto",
       "children": [
         {
           "name": "Промокоды",
           "autoTests": 4,
           "manualTests": 8,
+          "tags": "auto",
           "children": [
             {
               "name": "Промокод Express",
               "autoTests": 1,
-              "manualTests": 1
+              "manualTests": 1,
+              "tags": "auto"
             },
             {
               "name": "Самостоятельный промокод",
-              "autoTests": 2,
-              "manualTests": 3
+              "autoTests": 3,
+              "manualTests": 3,
+              "tags": "auto"
             },
             {
-              "name": "Импротированный промокод",
-              "autoTests": 1,
+              "name": "Импротированный промокод Импротированный промокод Импротированный промокод Импротированный промокод Импротированный промокод",
               "manualTests": 4
             }
           ]
@@ -82,10 +91,10 @@
           "name": "Система лояльности",
           "autoTests": 5,
           "manualTests": 7,
+          "tags": "auto",
           "children": [
             {
               "name": "Уровни скидок",
-              "autoTests": 5,
               "manualTests": 7
             }
           ]
